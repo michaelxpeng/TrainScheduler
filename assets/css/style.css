@@ -1,0 +1,16 @@
+body{
+    background: url(../images/background.jpg);
+    background-size: cover;
+  }
+  
+h1 {
+    font-family: 'Shrikhand', cursive;
+}
+
+.form-group {
+    color: white;
+}
+
+tbody {
+    font-family: 'Acme', sans-serif;
+}
