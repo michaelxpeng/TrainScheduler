@@ -25,17 +25,6 @@ $("#addTrain").on("click", function() {
     firstTrainTime = $("#firstTrainTimeInput").val().trim();
     trainFrequency = $("#trainFrequencyInput").val().trim();
 
-    var firstTrainTimeConverted = moment((firstTrainTime), "HH:mm").subtract(1, "years");
-    console.log(firstTrainTimeConverted);
-    var diffTime = moment().diff(moment(firstTrainTimeConverted), "minutes");
-    console.log(diffTime);
-    var remainder = diffTime % trainFrequency;
-    console.log(remainder);
-    minutesAway = trainFrequency - remainder;
-    console.log(minutesAway);
-    nextArrival = moment().add(minutesAway, "minutes").format("HH:mm A");
-    console.log(nextArrival);
-
     firebase.database().ref().push({
         trainName: trainName,
         destination: destination,
@@ -63,6 +52,17 @@ firebase.database().ref().on("child_added", function(childSnap) {
     console.log(nextArrival);
     minutesAway = childSnap.val().minutesAway;
     console.log(minutesAway);
+
+    var firstTrainTimeConverted = moment((firstTrainTime), "hh:mm").subtract(1, "years");
+    console.log(firstTrainTimeConverted);
+    var diffTime = moment().diff(moment(firstTrainTimeConverted), "minutes");
+    console.log(diffTime);
+    var remainder = diffTime % trainFrequency;
+    console.log(remainder);
+    minutesAway = trainFrequency - remainder;
+    console.log(minutesAway);
+    nextArrival = moment().add(minutesAway, "minutes").format("hh:mm A");
+    console.log(nextArrival);
 
     $("#trainTable > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + trainFrequency + "</td><td>" + nextArrival + "</td><td>" + minutesAway + "</td></tr>");
 
